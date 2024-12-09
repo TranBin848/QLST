@@ -10,3 +10,13 @@ VALUES
 (N'Cá heo', N'Thân hình thon, da trơn, màu xám', 120.0, N'Biển và đại dương', 40.0, N'Ăn cá và mực', N'ca_heo.jpg', 0),
 (N'Chim cánh cụt', N'Thân hình nhỏ, lông đen trắng, không bay được', 35.0, N'Vùng cực và đại dương lạnh', 20.0, N'Ăn cá và giáp xác', N'chim_canh_cut.jpg', 0),
 (N'Rắn hổ mang', N'Thân hình dài, đầu có thể mở rộng', 15.2, N'Rừng nhiệt đới', 10.0, N'Ăn chuột, chim và các loài bò sát nhỏ', N'ran_ho_mang.jpg', 0);
+INSERT INTO TenBang (TenChuong, SucChua, SoLuongCon, IsDeleted)
+VALUES
+('Chuồng Chim', 50, 0, 'False'),
+('Thủy Cung', 50, 0, 'False'),
+('Trại Sư Tử', 30, 0, 'False'),
+('Chuồng Rắn', 30, 0, 'False'),
+('Chuồng Ăn', 45, 0, 'False'),
+('Làng Cá Nước', 100, 0, 'False'),
+('Trại Hổ', 15, 0, 'False'),
+('Trại Gấu', 10, 0, 'False');

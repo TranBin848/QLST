@@ -50,3 +50,21 @@ create table LOAI
 	[LoaiDongVat] nvarchar(200) not null,
 	[PhanLoai] nvarchar(100) not null,
 )
+create table [TAIKHOAN]
+(
+	[ID] int identity(1, 1) constraint [PK_TAIKHOAN] primary key,
+	[MaTaiKhoan] as ('TK' + right('00000' + cast([ID] as varchar(5)), 5)) persisted,
+	[TenTaiKhoan] nvarchar(100) constraint [UQ_TenTaiKhoan] unique not null,
+	[MatKhau] varchar(50) not null,
+	[Hoten] nvarchar(100) not null,
+	[Email] varchar(100) constraint [UQ_Email] unique not null,
+)
+create table [ACTIVE_SESSION]
+(
+	[ID] int identity(1, 1) constraint [PK_ACTIVESESSION] primary key,
+	[IDTaiKhoan] int not null,
+	[SessionToken] nvarchar(255) not null,
+	[ExpiryTime] datetime not null,
+)
+alter table [ACTIVE_SESSION] add constraint [FK_ACTIVESESSION_TAIKHOAN]
+foreign key ([IDTaiKhoan]) references [TAIKHOAN]([ID]);

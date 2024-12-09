@@ -119,3 +119,4 @@ E:\LTTQ\DoAnThucHanh_LTTQ\QuanLySoThu\bin\Debug\net6.0-windows\MailKit.dll
 E:\LTTQ\DoAnThucHanh_LTTQ\QuanLySoThu\bin\Debug\net6.0-windows\MimeKit.dll
 E:\LTTQ\DoAnThucHanh_LTTQ\QuanLySoThu\obj\Debug\net6.0-windows\ResetPassword.g.cs
 E:\LTTQ\DoAnThucHanh_LTTQ\QuanLySoThu\obj\Debug\net6.0-windows\ResetPassword.baml
+E:\LTTQ\DoAnThucHanh_LTTQ\QuanLySoThu\obj\Debug\net6.0-windows\QuanLySoThu.sourcelink.json
