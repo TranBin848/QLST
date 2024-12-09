@@ -12,6 +12,7 @@ create table CONVAT
 	[TrangThaiSucKHoe] nvarchar(100) not null,
 	[IDChuong] int not null,
 	[IDLoai] int not null,
+	[AnhConVat] nvarchar(200) not null,
 	[IsDeleted] bit not null,
 )
 ALTER TABLE CONVAT
