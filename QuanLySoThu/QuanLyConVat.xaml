@@ -1,0 +1,321 @@
+﻿<UserControl x:Class="QuanLySoThu.QuanLyConVat"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuanLySoThu"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1080">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <!-- Cho phép TabControl co giãn -->
+        </Grid.RowDefinitions>
+        <TabControl x:Name="tcQLCV" Margin="10">
+
+            <TabControl.Resources>
+                <!-- Style cho TabItem -->
+                <Style TargetType="{x:Type TabItem}">
+                    <!-- Template để thay đổi giao diện tổng thể của TabItem -->
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                <Grid>
+                                    <!-- Border TabItem -->
+                                    <Border x:Name="Border"
+                                    CornerRadius="10,10,0,0"
+                                    Background="Transparent"
+                                    BorderThickness="0,0,0,3">
+                                        <!-- Nội dung Header của TabItem -->
+                                        <ContentPresenter x:Name="ContentSite"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left"
+                                                  ContentSource="Header"
+                                                  Margin="10,2"/>
+                                    </Border>
+                                </Grid>
+                                <!-- Trigger thay đổi màu khi Tab được chọn -->
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="LightBlue"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                    <!-- Giao diện cho Header -->
+                    <Setter Property="HeaderTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <Grid Height="45" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                                    <!-- Cột định nghĩa các phần tử bên trong Header -->
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- PackIcon Shape -->
+                                    <materialDesign:PackIcon
+                                Grid.Column="0"
+                                Kind="Shape"
+                                Foreground="DimGray"
+                                Width="16"
+                                Height="16"
+                                VerticalAlignment="Center"
+                                Margin="0,0,5,0" />
+
+                                    <!-- TextBlock hiển thị tên tab -->
+                                    <TextBlock Grid.Column="1"
+                                       FontSize="15"
+                                       Text="{Binding}" 
+                                       FontWeight="Bold" 
+                                       Foreground="DimGray"
+                                       VerticalAlignment="Center" 
+                                       HorizontalAlignment="Left" 
+                                       Margin="0,0,5,0" />
+
+                                    <!-- Button đóng tab -->
+                                    <Button Grid.Column="2"
+                                    Click="CloseTab_Click"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right" 
+                                    Background="Transparent"
+                                    Padding="0">
+                                        <Button.Template>
+                                            <ControlTemplate>
+                                                <Border x:Name="border"
+                                                BorderThickness="0" 
+                                                Background="Transparent" 
+                                                Width="20" 
+                                                Height="20" 
+                                                CornerRadius="10">
+                                                    <materialDesign:PackIcon
+                                                Kind="Close" Height="15" Width="15"
+                                                Foreground="Red"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center" />
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="#77808080" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+
+
+            <!-- Tab mặc định: Danh sách tài khoản -->
+            <TabItem Header="Quản lý con vật">
+                
+
+                <Grid Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="8*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Tiêu đề -->
+                    <Grid Grid.Row="0" Margin="0,0,30,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1.25*"/>
+                            <ColumnDefinition Width="0.75*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Name="txtds" Text="Danh sách con vật" Margin="10,10"
+                                    FontWeight="Bold" FontSize="35"/>
+                        <Grid Grid.Column="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="btnThemFile"
+                                Grid.Column="0" Margin="5,0"
+                               
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                ToolTip="Thêm từ Excel" Click="btnThemFile_Click">
+                                <materialDesign:PackIcon Kind="MicrosoftExcel" />
+                            </Button>
+                            <Button x:Name="btnXuatFile"
+                                Grid.Column="1" Margin="5,0"
+                                
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                ToolTip="Xuất ra Excel" Click="btnXuatFile_Click">
+                                <materialDesign:PackIcon Kind="FileExcelOutline" />
+                            </Button>
+                        </Grid>
+                    </Grid>
+
+                    <!-- Thanh công cụ -->
+                    <Grid Margin="20,0" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Ô tìm kiếm -->
+                        <TextBox x:Name="txtSearch" Grid.Column="0"
+                                 Margin="5,0,0,0" VerticalAlignment="Center"
+                                 materialDesign:HintAssist.Hint="Tìm kiếm"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" Padding="5" Height="40"
+                                 TextChanged="txtSearch_TextChanged"/>
+
+                        <!-- ComboBox -->
+                        <ComboBox x:Name="cbSearchType" Grid.Column="1" Margin="5,0,5,0" 
+                                  materialDesign:HintAssist.Hint="Search" Style="{StaticResource MaterialDesignOutlinedComboBox}" Padding="5,5"
+                                  Height="40">      
+
+                            <ComboBoxItem Tag="TenConVat" Content="Tên con vật" />
+                            <ComboBoxItem Tag="GioiTinh" Content="Giới Tính" />
+                            <ComboBoxItem Tag="Loai" Content="Loài" />
+                            <ComboBoxItem Tag="Chuong" Content="Chuồng" />
+                            <ComboBoxItem Tag="SucKhoa" Content="Sức khỏe" />
+                           
+
+                        </ComboBox>
+                        <Grid  Grid.Column="2" Margin="5,0">
+                            <Button x:Name="btnThem"
+            
+            Content="Thêm" 
+            HorizontalAlignment="Stretch" 
+            Click="btnThem_Click"     
+            Style="{StaticResource MaterialDesignRaisedLightButton}" 
+            ToolTip="Resource name: MaterialDesignRaisedLightButton" />
+
+                            <!-- Popup -->
+                            <Popup x:Name="popupOptions" 
+           PlacementTarget="{Binding ElementName=btnThem}" 
+           Placement="Bottom"
+           StaysOpen="False">
+                                <Border Background="White" Padding="10" BorderBrush="Gray" BorderThickness="1">
+                                    <StackPanel>
+                                        <Button x:Name="btnTaoConVat" Content="Tạo Con Vật" 
+                        Margin="0,5" 
+                        Style="{StaticResource MaterialDesignRaisedLightButton}" 
+                        Click="btnTaoConVat_Click" />
+                                        <Button x:Name="btnTaoLoai" Content="Tạo Loài" 
+                        Margin="0,5" 
+                        Style="{StaticResource MaterialDesignRaisedLightButton}" 
+                        Click="btnTaoLoai_Click" />
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                        
+                        <Button x:Name="btnXoa"
+                                Grid.Column="3" Margin="5,0" Content="Xóa" HorizontalAlignment="Stretch"      
+                                
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                ToolTip="Resource name: MaterialDesignRaisedLightButton" Click="btnXoa_Click" />
+                        <Button x:Name="btnLamMoi"
+                                Grid.Column="4" Margin="5,0" Content="Làm mới" HorizontalAlignment="Stretch"    
+                                
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                ToolTip="Resource name: MaterialDesignRaisedLightButton" Click="btnLamMoi_Click" />
+
+
+                    </Grid>
+
+                    <!-- Danh sách tài khoản -->
+
+                    <DataGrid Grid.Row="2" Margin="30,0" RowStyle="{DynamicResource DataGridRowStyle1}" 
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              x:Name="dgconvat" 
+                              Style="{DynamicResource DataGridStyle1}" 
+                              ItemsSource="{Binding ConVats}" 
+                              SelectionMode="Extended" 
+                              SelectionUnit="FullRow"
+                              >
+
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn Header="C" CanUserResize="False" Width="auto" 
+                                Binding="{Binding IsChecked, Mode=TwoWay}">
+                                <DataGridCheckBoxColumn.ElementStyle>
+                                    <Style TargetType="CheckBox">
+                                        <EventSetter Event="Checked" Handler="CheckBox_Checked" />
+                                        <EventSetter Event="Unchecked" Handler="CheckBox_Unchecked" />
+                                    </Style>
+                                </DataGridCheckBoxColumn.ElementStyle>
+                                <DataGridCheckBoxColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Style="{StaticResource CheckBoxStyle1}" x:Name="HeaderCheckBoxName"
+                                                  Checked="HeaderCheckBox_Checked" 
+                                                  Unchecked="HeaderCheckBox_Unchecked" />
+                                    </DataTemplate>
+                                </DataGridCheckBoxColumn.HeaderTemplate>
+                            </DataGridCheckBoxColumn>
+
+                            <DataGridTextColumn Header="Mã Con Vật" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding MaConVat}"/>
+                            <DataGridTemplateColumn Header="Tên Con Vật" IsReadOnly="True" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
+                                                <Ellipse Grid.Row="0">
+                                                    <Ellipse.Fill>
+                                                        <ImageBrush x:Name="AvatarImage" ImageSource="{Binding AnhConVat}"  
+                                                                Stretch="UniformToFill"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                            </Border>
+                                            <TextBlock Text="{Binding TenConVat}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Loài" IsReadOnly="True" Width="1.5*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Loai}" VerticalAlignment="Center"/>
+                                            <Button x:Name="btnDetailLoai" Background="#FADA7A" Foreground="Black" BorderBrush="Transparent" Margin="10,0,0,0" Style="{StaticResource gridEditButton}" Click="btnDetailLoai_Click">
+                                                <Icon:PackIconMaterial Kind="Eye" Style="{StaticResource gridButtonIcon}"/>
+                                            </Button>
+
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Giới Tính" Binding="{Binding GioiTinh}" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Chuồng" Binding="{Binding Chuong}" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Sức Khỏe" Binding="{Binding SucKhoe}" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Tuổi" Binding="{Binding Tuoi}" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Ngày Sinh" Binding="{Binding NgaySinh}" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Ngày Nhập" Binding="{Binding NgayNhap}" IsReadOnly="True" Width="*"/>
+                            <DataGridTemplateColumn Header="Cài đặt" IsReadOnly="True" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button HorizontalAlignment="Center" Foreground="Black" BorderBrush="Transparent"  x:Name="btnDetail" Background="#FADA7A" Style="{StaticResource gridEditButton}" Click="btnDetail_Click">
+                                                <Icon:PackIconMaterial  Kind="Eye" Style="{StaticResource gridButtonIcon}"/>
+                                            </Button>
+                                            
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

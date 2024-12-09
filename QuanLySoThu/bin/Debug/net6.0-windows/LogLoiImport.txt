@@ -1,0 +1,5 @@
+Dòng 2: Con Đực không thể có thai.
+Dòng 3: Ngày sinh (11/12/2025) không thể lớn hơn ngày nhập (10/12/2024).
+Dòng 4: Tên con vật đã có trong sở thú.
+Dòng 5: Tên Chuồng không phù hợp với Loài: Chuồng Ăn Cỏ
+Dòng 6: Ngày sinh không hợp lệ hoặc không đúng định dạng 'dd/MM/yyyy' : 3/11/2005
